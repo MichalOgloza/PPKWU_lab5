@@ -16,8 +16,11 @@ def find(key_word):
     soup = BeautifulSoup(html, features="html.parser")
     lst = soup.find('ul', {"id": "company-list"})
     for item in lst.find_all('li', {"class": "company-item"}, recursive=False):
-        name = item.find('div', {"class": "company-top-content"}).find('div').find('h2').find('a').get_text()
-        print(name)
+        name = item.find('a', {"class": "company-name"}).get_text()
+        address = item.find('div', {"class": "address"}).get_text()
+        number = item.find('a', {"class": "icon-telephone"})["title"]
+        email = item.find('a', {"class": "icon-envelope"})["data-company-email"]
+        print(name + "\n" + address + "\n" + number + "\n" + email)
     return key_word
 
 
