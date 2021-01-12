@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% for item in data %}
+        <div style="border-style: groove">
+            Company: {{item.name}}<br/>
+            Address: {{item.address}}<br/>
+            Tel: {{item.number}}<br/>
+            Email: {{item.email}}<br/>
+            <a href="{{ url_for('download',  id=loop.index - 1)}}"> Downlad vCard </a><br/>
+        </div>
+    {% endfor %}
+</body>
+</html>

@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, Response, render_template
 from bs4 import BeautifulSoup
 import requests
 import vobject
@@ -26,7 +26,22 @@ def find(key_word):
         number = item.find('a', {"class": "icon-telephone"})["title"].strip()
         email = item.find('a', {"class": "icon-envelope"})["data-company-email"].strip()
         card = vcard(name, address, number, email)
-    return key_word
+        dct = {
+            "name": name,
+            "address": address,
+            "number": number,
+            "email": email,
+            "card": card
+        }
+        content_lst.append(dct)
+    return render_template('page.html', data=content_lst)
+
+
+@app.route('/download/<id>')
+def download(id):
+    card = content_lst[int(id)]["card"]
+    return Response(card.serialize(), mimetype="text/json+application+vcard", headers={"Content-Disposition": "attachment;filename=card.vcf"})
+
 
 
 def vcard(name, address, number, email):
