@@ -50,8 +50,10 @@ def vcard(name, address, number, email):
     card.fn.value = name
     card.add('address')
     card.address.value = address
+    card.address.type_param = 'WORK'
     card.add('tel')
     card.tel.value = number
+    card.tel.type_param = 'WORK'
     card.add('email')
     card.email.value = email
     card.email.type_param = 'INTERNET'
