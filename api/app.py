@@ -10,7 +10,9 @@ content_lst = []
 
 @app.route('/')
 def home():
-    return "Hello World"
+    return "This API returns list of companies available on https://panoramafirm.pl/szukaj " \
+           "with vCard generation feature. " \
+           "Available at address: /find_company/[keyword]"
 
 
 @app.route('/find_company/<key_word>')
