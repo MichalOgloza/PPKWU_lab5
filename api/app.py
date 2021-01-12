@@ -40,8 +40,9 @@ def find(key_word):
 @app.route('/download/<id>')
 def download(id):
     card = content_lst[int(id)]["card"]
-    return Response(card.serialize(), mimetype="text/json+application+vcard", headers={"Content-Disposition": "attachment;filename=card.vcf"})
-
+    return Response(card.serialize(), mimetype="text/json+application+vcard",
+                    headers={"Content-Disposition": "attachment;filename=card.vcf",
+                             "Content-Transfer-Encoding": "binary"})
 
 
 def vcard(name, address, number, email):
